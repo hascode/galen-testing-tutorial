@@ -18,23 +18,20 @@ public class BlogArticlePageTest extends GalenJUnitTestBase {
 		return new FirefoxDriver();
 	}
 
-	private TestDevice device;
+	private DeviceSetup device;
 
-	public BlogArticlePageTest(final TestDevice testDevice) {
+	public BlogArticlePageTest(final DeviceSetup deviceSetup) {
 		super();
-		this.device = testDevice;
+		this.device = deviceSetup;
 	}
 
-	public static class TestDevice {
-
-		private final String name;
+	public static class DeviceSetup {
 		private final Dimension screenSize;
 		private final List<String> tags;
 
-		public TestDevice(String name, Dimension screenSize, List<String> tags) {
-			this.name = name;
+		public DeviceSetup(Dimension screenSize, String... tags) {
 			this.screenSize = screenSize;
-			this.tags = tags;
+			this.tags = Arrays.asList(tags);
 		}
 
 		public Dimension getScreenSize() {
@@ -48,19 +45,17 @@ public class BlogArticlePageTest extends GalenJUnitTestBase {
 
 	@Parameterized.Parameters
 	public static Iterable<Object[]> devices() {
-		return Arrays.asList(new Object[][] {
-				{ new TestDevice("desktop", new Dimension(1024, 800), Arrays.asList("normal", "desktop")) },
-				// { new TestDevice("small-phone", new Dimension(280, 800),
-				// Arrays.asList("small-phone", "phone", "mobile")) },
-				// { new TestDevice("normal-phone", new Dimension(320, 800),
-				// Arrays.asList("normal-phone", "phone", "mobile")) }
+		return Arrays.asList(new Object[][] { { new DeviceSetup(new Dimension(1024, 800), "normal", "desktop") },
+				{ new DeviceSetup(new Dimension(280, 800), "small-phone", "phone", "mobile") },
+				{ new DeviceSetup(new Dimension(320, 800), "normal-phone", "phone", "mobile") }
 
 		});
 	}
 
 	@Test
 	public void shouldRenderBlogArticleCorrect() throws Exception {
-		load("http://www.hascode.com/2016/05/load-testing-web-applications-with-gatling-and-maven/", 1024, 768);
-		checkLayout("/specs/hascodeArticle.spec", Arrays.asList("mobile"));
+		load("http://www.hascode.com/2016/05/load-testing-web-applications-with-gatling-and-maven/",
+				device.getScreenSize().getWidth(), device.getScreenSize().getHeight());
+		checkLayout("/specs/hascodeArticle.spec", device.getTags());
 	}
 }
