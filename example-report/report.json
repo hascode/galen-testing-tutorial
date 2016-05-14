@@ -1,0 +1,17 @@
+{
+  "tests" : [ {
+    "name" : "com.galenframework.junit.GalenJUnitTestBase#>initReport",
+    "startedAt" : 1463239895087,
+    "endedAt" : 1463239895087,
+    "failed" : true,
+    "statistic" : {
+      "passed" : 5,
+      "errors" : 1,
+      "warnings" : 0,
+      "total" : 6
+    },
+    "testId" : "1-com.galenframework.junit.galenjunittestbase-initreport",
+    "failed" : true,
+    "duration" : 0
+  } ]
+}
