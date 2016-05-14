@@ -3,6 +3,9 @@
 	page_heading	css	.logo-name a
 	post_heading	css	.post h2
 	post_image		css #attachment_1292 img
+	
+@groups
+	post_elements post_heading, post_image
 
 = Page Header Section =
 	page_heading:
@@ -10,6 +13,9 @@
 		text is "hasCode.com"
 
 = Post Section =	
+	&post_elements:
+		visible
+	
 	post_heading:
 		text contains "Maven"
 		
