@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.galenframework.junit.GalenJUnitTestBase;
 
-public class HascodeHomePageTest extends GalenJUnitTestBase {
+public class BlogArticlePageTest extends GalenJUnitTestBase {
 
 	@Override
 	public WebDriver createDriver() {
@@ -20,9 +20,9 @@ public class HascodeHomePageTest extends GalenJUnitTestBase {
 
 	private TestDevice device;
 
-	public HascodeHomePageTest(final TestDevice pTestDevice) {
+	public BlogArticlePageTest(final TestDevice testDevice) {
 		super();
-		this.device = pTestDevice;
+		this.device = testDevice;
 	}
 
 	public static class TestDevice {
@@ -59,8 +59,8 @@ public class HascodeHomePageTest extends GalenJUnitTestBase {
 	}
 
 	@Test
-	public void welcomePage_shouldLookGood_onDesktopDevice() throws Exception {
-		load("http://www.hascode.com/", 1024, 768);
-		checkLayout("/specs/hascodeHomepage.spec", Arrays.asList("mobile"));
+	public void shouldRenderBlogArticleCorrect() throws Exception {
+		load("http://www.hascode.com/2016/05/load-testing-web-applications-with-gatling-and-maven/", 1024, 768);
+		checkLayout("/specs/hascodeArticle.spec", Arrays.asList("mobile"));
 	}
 }
